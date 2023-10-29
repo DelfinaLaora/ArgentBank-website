@@ -1,23 +1,21 @@
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/images/argentBankLogo.png'
-import LogOut from '../../pages/LogOut/LogOut'
-// import { useSelector } from 'react-redux'
-// import { selectUser } from '../../features/userSlice'
-// import { selectCurrentUser } from '../../features/userSlice'
+import LogOutUser from '../../pages/LogOutUser/LogOutUser'
+import { useSelector } from 'react-redux'
+import {
+   selectCurrentUserName,
+   selectCurrentUserToken,
+} from '../../features/authSlice'
 
-// import { useSelector } from 'react-redux'
 function Header() {
-   // const { token } = useSelector((state) => state.auth)
-   // console.log({ token })
-   const token = localStorage.getItem('userToken')
-      ? localStorage.getItem('userToken')
-      : null
-   // const user = useSelector(selectUser)
-   // const userAuth = useSelector(selectCurrentUser)
+   const token = useSelector(selectCurrentUserToken)
+   // console.log(token)
+   const userName = useSelector(selectCurrentUserName)
 
    // Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.
    const iconUser = (
       <svg
+         className="icon"
          xmlns="http://www.w3.org/2000/svg"
          height="1em"
          viewBox="0 0 512 512"
@@ -28,6 +26,7 @@ function Header() {
 
    const iconParams = (
       <svg
+         className="icon"
          xmlns="http://www.w3.org/2000/svg"
          height="1em"
          viewBox="0 0 512 512"
@@ -36,39 +35,40 @@ function Header() {
       </svg>
    )
    return (
-      <nav className="main-nav">
-         <Link to="/">
-            <img
-               className="main-nav-logo-image"
-               src={Logo}
-               alt="Argent Bank Logo"
-            />
-            <h1 className="sr-only">Argent Bank</h1>
-         </Link>
+      <>
+         <nav className="main-nav">
+            <Link to="/">
+               <img
+                  className="main-nav-logo-image"
+                  src={Logo}
+                  alt="Argent Bank Logo"
+               />
+               <h1 className="sr-only">Argent Bank</h1>
+            </Link>
 
-         <div>
-            {/* <Link className="main-nav-item" to="/sign-in">
-               {iconUser}
-               Sign In
-            </Link> */}
-
-            {/* pour afficher le composant de deconnexion */}
-            {/* <LogOut /> */}
-            {/* {userAuth ? <LogOut /> : ''} */}
-            {token ? (
-               <>
-                  {iconUser}
-                  <LogOut />
-               </>
-            ) : (
-               <Link className="main-nav-item" to="/sign-in">
-                  {iconUser}
-                  Sign In
-               </Link>
-            )}
-            {iconParams}
-         </div>
-      </nav>
+            <div className="nav">
+               {token ? (
+                  <>
+                     <Link className="main-nav-item " to="/profile">
+                        {userName}
+                        {iconUser}
+                     </Link>
+                     <Link className="main-nav-item " to="/edit-user">
+                        {iconParams}
+                     </Link>
+                     <LogOutUser />
+                  </>
+               ) : (
+                  <>
+                     <Link className="main-nav-item" to="/sign-in">
+                        {iconUser}
+                        Sign In
+                     </Link>
+                  </>
+               )}
+            </div>
+         </nav>
+      </>
    )
 }
 

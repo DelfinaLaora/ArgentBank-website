@@ -1,5 +1,4 @@
 import React from 'react'
-// import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
@@ -11,11 +10,11 @@ import User from './pages/User/User'
 
 import { Provider } from 'react-redux'
 import { store } from './store'
+import EditUser from './pages/EditUser/editUser'
 
-// import { ApiProvider } from '@reduxjs/toolkit/query/react'
 // import { userProfile } from './features/profileSlice'
 // import RequireAuth from './features/RequireAuth'
-
+import ProtectedRoute from './routing/ProtectedRoute'
 const router = createBrowserRouter([
    {
       path: '/',
@@ -39,9 +38,26 @@ const router = createBrowserRouter([
                   element: <SignIn />,
                },
                {
-                  path: '/profile',
-                  element: <User />,
+                  element: <ProtectedRoute />,
+                  children: [
+                     {
+                        path: '/profile',
+                        element: <User />,
+                     },
+                     {
+                        path: '/edit-user',
+                        element: <EditUser />,
+                     },
+                  ],
                },
+               // {
+               //    path: '/profile',
+               //    element: <User />,
+               // },
+               // {
+               //    path: '/edit-user',
+               //    element: <EditUser />,
+               // },
 
                // {
                //    element: <RequireAuth />,
