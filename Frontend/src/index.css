@@ -34,14 +34,31 @@ body {
    width: 1px !important;
    white-space: nowrap !important; /* 3 */
 }
-/*******Ajout********/
-.sr-params {
-   margin-left: 80px;
-   color: #42b983;
-   position: absolute !important;
-   white-space: nowrap !important; /* 3 */
+
+.nav {
+   display: flex;
+   align-items: center;
+   color: #00bc77;
 }
-/********************/
+
+.button_logout {
+   background-color: transparent;
+   border: transparent;
+   margin-top: 3px;
+}
+
+.icon {
+   fill: #00bc77;
+   padding: 8px;
+   margin-right: 2px;
+}
+
+@media (max-width: 720px) {
+   .icon {
+      padding: 4px;
+   }
+}
+
 .main-nav {
    display: flex;
    justify-content: space-between;
@@ -70,18 +87,22 @@ body {
 }
 
 .main-nav-logo {
-   display: flex;
-   align-items: center;
-}
-/* .main-nav-logo {
-   display: flex;
-   /* align-items: center; */
-/*  width: 250px;
- } */
-
-.main-nav-logo-image {
    max-width: 100%;
    width: 200px;
+}
+
+.contener-home {
+   padding-bottom: 140px;
+}
+
+.contener-account {
+   padding-top: 90px;
+   padding-bottom: 90px;
+}
+
+.contener-sign-in {
+   padding-top: 200px;
+   padding-bottom: 300px;
 }
 
 .hero {
@@ -148,26 +169,16 @@ body {
    }
 }
 
-/* .feature-icon {
+.feature-icon {
    width: 100px;
    border: 10px solid #00bc77;
    border-radius: 50%;
-   padding: 1rem;
-} */
-
-.feature-icon {
-   /******/
+   padding: 1.2rem;
    display: flex;
    justify-content: center;
    align-items: center;
-   font-size: 70px;
    height: 100px;
    margin: auto;
-   /******/
-   width: 100px;
-   border: 10px solid #00bc77;
-   border-radius: 50%;
-   padding: 1rem;
 }
 
 .feature-item {
@@ -182,25 +193,6 @@ body {
    margin-bottom: 0.5rem;
 }
 
-/*****Ajout****/
-.nav {
-   display: flex;
-   align-items: center;
-   color: #00bc77;
-}
-.button_logout {
-   background-color: transparent;
-   border: transparent;
-   margin-top: 3px;
-}
-.icon {
-   fill: #00bc77;
-   font-size: 1.1rem;
-   padding: 8px;
-   margin-right: 2px;
-}
-
-/*****************/
 .sign-in-button {
    display: block;
    width: 100%;
@@ -222,7 +214,6 @@ body {
    padding: 2rem;
 }
 
-/**************/
 .edit-in-button {
    display: inline-block;
    width: 40%;
@@ -236,18 +227,6 @@ body {
    margin-right: 10px;
    margin-left: 10px;
 }
-
-.edit-in-content {
-   box-sizing: border-box;
-   background-color: white;
-   /* width: 400px; */
-   width: 30%;
-   margin: 0 auto;
-   margin-top: 3rem;
-   margin-bottom: 3rem;
-   padding: 2rem;
-}
-/****************/
 
 .sign-in-icon {
    font-size: 5rem;
@@ -277,19 +256,55 @@ body {
    font-size: 1.2rem;
 }
 
-/*****************/
+.modal-container {
+   position: fixed;
+   inset: 0;
+   /*Propriété raccourcie permettant de définir les propriétés top, right, bottom et/ou left*/
+   width: 100vw;
+   height: 100vh;
+   background: rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+   display: flex;
+   justify-content: center;
+   margin-top: 100px;
+   align-items: center;
+}
+
+.content-modal {
+   position: relative;
+   display: flex;
+   justify-content: center;
+   background: white;
+   border-radius: 10px;
+   width: 20%;
+   padding: 20px;
+}
+
+.edit {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: black;
+   padding-bottom: 2rem;
+   padding-top: 2rem;
+}
+
 .input-wrapper-edit {
    display: flex;
    justify-content: space-around;
    align-items: center;
+   width: 100%;
    text-align: left;
    margin-bottom: 1rem;
 }
+
 .input-wrapper-edit label {
    font-weight: bold;
-   margin-right: 5px;
    justify-content: center;
 }
+
 .input-wrapper-edit input {
    padding: 5px;
    font-size: 1.2rem;
@@ -299,9 +314,7 @@ body {
 #LastName,
 #FirstName {
    background-color: #ccc;
-   color: #706e6e;
 }
-/*****************/
 
 .footer {
    display: flex;
@@ -363,12 +376,11 @@ body {
 
 .header {
    color: #fff;
-   padding-top: 2rem;
    margin-bottom: 2rem;
+   padding-top: 2rem;
 }
 
 .transaction-button {
-   display: block;
    width: 100%;
    padding: 8px;
    font-size: 1.1rem;
@@ -393,8 +405,6 @@ body {
    }
 }
 
-/*******************/
-
 .error_msg {
    width: 88%;
    padding: 15px;
@@ -413,7 +423,7 @@ body {
    margin-top: 2px;
    margin-bottom: 2px;
    padding: 5px;
-   border: 3px solid (var(--color-primary));
+   border: 3px solid white;
    border-bottom-color: transparent;
    border-radius: 22px;
 
@@ -427,5 +437,57 @@ body {
 
    to {
       transform: rotate(360deg);
+   }
+}
+
+.unauthorized {
+   height: 450px;
+   padding-top: 25%;
+   color: red;
+}
+
+.contener-error {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 750px;
+   margin-bottom: 100px;
+}
+.contener-error h2 {
+   width: 100%;
+   text-align: center;
+   font-size: 288px;
+   font-weight: 700;
+   margin-top: -1px;
+   line-height: 410px;
+   color: #00bc77;
+}
+
+.contener-error h3 {
+   font-size: 36px;
+   margin-top: -160px;
+   margin-bottom: 70px;
+}
+
+.contener-error a {
+   color: #00bc77;
+   text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+   .contener-error h2 {
+      font-size: 96px;
+   }
+
+   .contener-error h3 {
+      width: 260px;
+      text-align: center;
+      font-size: 18px;
+   }
+
+   .contener-error a {
+      width: 221px;
+      text-align: center;
+      font-size: 14px;
    }
 }

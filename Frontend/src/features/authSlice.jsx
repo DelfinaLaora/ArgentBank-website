@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchLogin, fetchProfil, fetchUserName } from './authActions'
+import { fetchLogin, fetchProfil, updateUserName } from './authActions'
 
 const token = localStorage.getItem('userToken')
    ? localStorage.getItem('userToken')
@@ -12,7 +12,6 @@ const initialState = {
    userInfo: {},
    userName: null,
    editUserName: null,
-   id: null,
 }
 
 // on gère les actions dans le reducer
@@ -33,18 +32,15 @@ const authSlice = createSlice({
          state.token = null
          state.userInfo = null
          state.userName = null
-         state.id = null
-      },
-      setCredentials: (state, action) => {
-         state.userInfo = action.payload
       },
    },
 
    extraReducers(builder) {
-      //  Ajout des réducteurs pour des types d’action supplémentaires,
+      // Ajout des réducteurs pour des types d’action supplémentaires,
       // et gère l’état de chargement si nécessaire
       // builder.addCase(actionCreator, reducer)
       builder
+         // token 'user/login'
          .addCase(fetchLogin.pending, (state, action) => {
             state.loading = true
          })
@@ -59,7 +55,7 @@ const authSlice = createSlice({
             state.error = action.payload
             state.token = null
          })
-         // profil user
+         // profil user 'user/profile'
          .addCase(fetchProfil.pending, (state, action) => {
             state.loading = true
          })
@@ -67,19 +63,18 @@ const authSlice = createSlice({
             state.loading = false
             state.error = null
             state.userInfo = action.payload
-            state.userName = action.payload.userName
-            state.id = action.payload.id
+            state.userName = action.payload?.userName
          })
          .addCase(fetchProfil.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
             state.userInfo = null
          })
-         // edit user
-         .addCase(fetchUserName.pending, (state, action) => {
+         // edit user 'user/userName'
+         .addCase(updateUserName.pending, (state, action) => {
             state.loading = false
          })
-         .addCase(fetchUserName.fulfilled, (state, action) => {
+         .addCase(updateUserName.fulfilled, (state, action) => {
             state.loading = false
             state.error = null
             // if (!action.payload) {
@@ -87,25 +82,22 @@ const authSlice = createSlice({
             //    console.log(action.payload)
             //    return
             // }
-            state.editUserName = action.userName
+            state.userName = action.payload.userName
          })
-         .addCase(fetchUserName.rejected, (state, action) => {
+         .addCase(updateUserName.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
-            state.userName = null
          })
    },
 })
 
-// on export chaque action individuellement
-export const { logOut, setCredentials } = authSlice.actions
+// on export chaque action individuellement et seront destructuré
+export const { logOut } = authSlice.actions
 // on export le reducer comme default export
 export default authSlice.reducer
 
 export const selectCurrentUserToken = (state) => state.auth.token
+export const selectCurrentUserInfo = (state) => state.auth.userInfo
 export const selectCurrentError = (state) => state.auth.error
 export const selectCurrentLoading = (state) => state.auth.loading
-export const selectCurrentUserInfo = (state) => state.auth.userInfo
 export const selectCurrentUserName = (state) => state.auth.userName
-export const selectCurrentUser = (state) => state.auth
-export const selectCurrentEditUserName = (state) => state.auth.editUserName

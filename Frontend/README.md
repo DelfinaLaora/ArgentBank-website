@@ -1,3 +1,87 @@
+Société ArgentBank
+
+
+## Getting Started
+
+### Prerequisites
+
+Argent Bank uses the following tech stack:
+
+- [Node.js v12](https://nodejs.org/en/)
+`nvm use v12`
+- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+
+
+```bash
+# Install dependencies
+npm install
+
+# Start local dev server
+npm run dev:server
+
+# Populate database with two users
+npm run populate-db
+```
+Your server should now be running at http://localhost:3001 and you will now have two users in your MongoDB database!
+
+--> Go README in Backend
+
+Explication projet:
+
+![Alt text](src/assets/images/argentBankLogo.png)
+
+Mise en place du tableau de bord des utilisateurs en 2 phases.
+
+But de la première phase :
+
+- Créer l’application web complète et responsive avec React (nous avions le HTML et CSS pour la page d'accueil, la page de connexion et la page de profil déjà fourni)
+- Utiliser Redux pour gérer le state de l'ensemble de l'application.
+
+- Ce que doit faire l’application :
+
+    •  L'utilisateur peut visiter la page d’accueil.
+    •  L'utilisateur peut se connecter au système.
+    •  L'utilisateur peut se déconnecter du système.
+    •  L'utilisateur ne peut voir les informations relatives à son propre profil qu'après s'être connecté avec succès.
+    •  L’utilisateur ne peut pas modifier son nom ni son prénom, mais il peut modifier son pseudo.
+      
+Actions :
+- Forker le repo existant 
+- Intégrer une bonne pratique de Green Code (optimisation des images et du code).
+
+Les routes API déjà crée par les ingénieurs back-end. 
+
+Le but de la deuxième phase :
+
+- Donner notre avis pour la modélisation coté back-end des routes API concernant les transactions.
+
+- Elles doivent permettre aux utilisateurs 
+    •  De visualiser toutes leurs transactions pour le mois en cours, groupées par compte ;
+    •  De visualiser les détails d'une transaction dans une autre vue ;
+    •  D'ajouter, de modifier ou de supprimer des informations sur une transaction (on ne supprimera ou n'ajoutera pas de transaction).
+
+Actions :
+Fournir un document décrivant les routes API proposées pour les manipulations sur les transactions, en suivant les directives de Swagger.  
+
+Mise en place du projet
+Frontend
+- Installation dépendance « npm install »
+- Modification node v12 avec « nvm use v12 »
+- Installation create-react-app « npm create-react-app@3.4.1 -- scripts-version 4 .0.3
+- Installation react-router-dom « npm install react-router-dom »
+- Installation de redux et toolkit « npm install react-redux @reduxjs/toolkit
+- Installation immer « npm install immer »
+- Installation MongoDB –> db version v7.0.2
+
+Lancement du projet
+
+Modifier node avec « nvm use v12 »
+Lancer le serveur en local depuis le backend avec ‘npm run dev:server’
+Lancer l’application depuis le frontend avec ‘npm start’
+La base de donnée avec ‘npm run populate-db’ ou avec l’extension mongoDB de vsCode
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

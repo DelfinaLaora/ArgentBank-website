@@ -1,13 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-// import { setCredentials } from './authSlice'
-// import { useDispatch } from 'react-redux'
-// import { selectCurrentUserToken } from './authSlice'
-// import { useSelector } from 'react-redux'
 
 const urlLogin = `http://localhost:3001/api/v1/user/login`
-// on crée le Thunk
 
+// on crée le Thunk
 export const fetchLogin = createAsyncThunk(
+   // le nom de l'action
    'user/login',
    async ({ email, password }, { rejectWithValue }) => {
       try {
@@ -21,9 +18,12 @@ export const fetchLogin = createAsyncThunk(
          })
          if (response.ok) {
             const data = await response.json()
-            console.log(data)
             return data.body.token
          }
+         if (response.status === 400)
+            throw new Error(
+               `Veuillez indiquer un mail ou un mot de passe valide`
+            )
       } catch (err) {
          if (err.response && err.response.data.message) {
             return rejectWithValue(err.response.data.message)
@@ -36,7 +36,6 @@ export const fetchLogin = createAsyncThunk(
 
 const urlProfil = `http://localhost:3001/api/v1/user/profile`
 
-// on crée le Thunk
 export const fetchProfil = createAsyncThunk('user/profile', async () => {
    const token = localStorage.getItem('userToken')
    try {
@@ -48,7 +47,6 @@ export const fetchProfil = createAsyncThunk('user/profile', async () => {
       })
       if (res.ok) {
          const data = await res.json()
-         console.log(data)
          return data.body
       }
    } catch (err) {
@@ -56,7 +54,7 @@ export const fetchProfil = createAsyncThunk('user/profile', async () => {
    }
 })
 
-export const fetchUserName = createAsyncThunk(
+export const updateUserName = createAsyncThunk(
    'user/userName',
    async ({ editUserName }, { rejectWithValue }) => {
       const token = localStorage.getItem('userToken')
@@ -69,13 +67,10 @@ export const fetchUserName = createAsyncThunk(
                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ userName: editUserName }),
-            // body: JSON.stringify({ userName }),
          })
          if (res.ok) {
             const data = await res.json()
-            console.log(data)
             return data.body
-            // return data.body
          }
       } catch (err) {
          if (err.response && err.response.data.message) {

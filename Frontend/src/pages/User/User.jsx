@@ -1,30 +1,54 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+
+import { fetchProfil } from '../../features/authActions'
 import {
    selectCurrentLoading,
    selectCurrentError,
    selectCurrentUserToken,
+   selectCurrentUserInfo,
 } from '../../features/authSlice'
 import Loader from '../../utils/Style/Loader'
 import Error from '../../pages/Error/Error'
-import { useEffect } from 'react'
-import { fetchProfil } from '../../features/authActions'
+import AccountTransaction from '../../components/Account/Account'
+
+import Modal from '../../components/Modal/Modal'
+import { openModal } from '../../features/modalSlice'
+
+const account = [
+   {
+      id: 1,
+      title: 'Argent Bank Checking (x8349)',
+      amount: '$2,082.79',
+      description: 'Available Balance',
+   },
+   {
+      id: 2,
+      title: 'Argent Bank Checking (x8349)',
+      amount: '$10,928.42',
+      description: 'Available Balance',
+   },
+   {
+      id: 1,
+      title: 'Argent Bank Checking (x8349)',
+      amount: '$184.30',
+      description: 'Current Balance',
+   },
+]
 
 function User() {
    const dispatch = useDispatch()
 
    const token = useSelector(selectCurrentUserToken)
-   // console.log(token) /*uniquement le token */
    const loading = useSelector(selectCurrentLoading)
    const error = useSelector(selectCurrentError)
+   const user = useSelector(selectCurrentUserInfo)
 
-   const data = useSelector((state) => state.auth.userInfo)
-   console.log(data) /*info user */
+   const { isOpen } = useSelector((state) => state.modal)
 
    useEffect(() => {
       if (token) dispatch(fetchProfil())
    }, [dispatch, token])
-   const userName = data?.userName
 
    return (
       <>
@@ -33,67 +57,39 @@ function User() {
             <Loader />
          ) : (
             <>
+               {isOpen && <Modal />}
                <main className="main bg-dark">
                   <div className="header">
-                     <h1>
-                        Welcome back
-                        <br />
-                        {data !== null ? `${userName} ` : ' welcome'}
-                     </h1>
-                     <Link className="edit-button" to="/edit-user">
+                     {token !== null ? (
+                        <h1>
+                           Welcome back
+                           <br />
+                           {user.firstName} {user.lastName}
+                        </h1>
+                     ) : (
+                        <h1> welcome</h1>
+                     )}
+
+                     <button
+                        className="edit-button"
+                        onClick={() => dispatch(openModal())}
+                     >
                         Edit Name
-                     </Link>
+                     </button>
                   </div>
 
-                  <h2 className="sr-only">Accounts</h2>
-                  <section className="account">
-                     <div className="account-content-wrapper">
-                        <h3 className="account-title">
-                           Argent Bank Checking (x8349)
-                        </h3>
-                        <p className="account-amount">$2,082.79</p>
-                        <p className="account-amount-description">
-                           Available Balance
-                        </p>
-                     </div>
-                     <div className="account-content-wrapper cta">
-                        <button className="transaction-button">
-                           View transactions
-                        </button>
-                     </div>
-                  </section>
-                  <section className="account">
-                     <div className="account-content-wrapper">
-                        <h3 className="account-title">
-                           Argent Bank Savings (x6712)
-                        </h3>
-                        <p className="account-amount">$10,928.42</p>
-                        <p className="account-amount-description">
-                           Available Balance
-                        </p>
-                     </div>
-                     <div className="account-content-wrapper cta">
-                        <button className="transaction-button">
-                           View transactions
-                        </button>
-                     </div>
-                  </section>
-                  <section className="account">
-                     <div className="account-content-wrapper">
-                        <h3 className="account-title">
-                           Argent Bank Credit Card (x8349)
-                        </h3>
-                        <p className="account-amount">$184.30</p>
-                        <p className="account-amount-description">
-                           Current Balance
-                        </p>
-                     </div>
-                     <div className="account-content-wrapper cta">
-                        <button className="transaction-button">
-                           View transactions
-                        </button>
-                     </div>
-                  </section>
+                  <div className="contener-account">
+                     <h2 className="sr-only">Accounts</h2>
+                     {account.map((account, index) => (
+                        <AccountTransaction
+                           key={`${account}-${index}`}
+                           title={account.title}
+                           amount={account.amount}
+                           description={account.description}
+                           id={account.id}
+                        />
+                     ))}
+                  </div>
                </main>
             </>
          )}

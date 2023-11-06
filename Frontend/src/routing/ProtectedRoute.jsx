@@ -1,13 +1,12 @@
-// ProtectedRoute.js
 import { useSelector } from 'react-redux'
 import { NavLink, Outlet } from 'react-router-dom'
 import { selectCurrentUserToken } from '../features/authSlice'
 
 const ProtectedRoute = () => {
    const token = useSelector(selectCurrentUserToken)
-   // Afficher non autorisé si aucun utilisateur n’est trouvé dans le magasin redux
+   // Afficher non autorisé si aucun utilisateur n’est trouvé dans le store redux
 
-   if (!token) {
+   if (!token || token === undefined) {
       return (
          <div className="unauthorized">
             <h1>Unauthorized :(</h1>
