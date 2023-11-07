@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './index.css'
+import './utils/Style/index.css'
 
-import Root from './pages/Root/Root'
+import Root from './routing/Root/Root'
 import Error from './pages/Error/Error'
 import Home from './pages/Home/Home'
 import SignIn from './pages/SignIn/SignIn'

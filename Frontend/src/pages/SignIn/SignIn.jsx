@@ -9,7 +9,7 @@ import {
    selectCurrentError,
    logOut,
 } from '../../features/authSlice'
-import Loader from './../../utils/Style/Loader'
+import Loader from '../../utils/Loader/Loader'
 
 function SignIn() {
    const dispatch = useDispatch()

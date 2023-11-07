@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Logo from '../../assets/images/argentBankLogo.png'
-import LogOutUser from '../../pages/LogOutUser/LogOutUser'
+import LogOutUser from '../LogOutUser/LogOutUser'
 import {
    selectCurrentUserToken,
    selectCurrentUserName,

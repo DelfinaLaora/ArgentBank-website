@@ -8,7 +8,7 @@ import {
    selectCurrentUserToken,
    selectCurrentUserInfo,
 } from '../../features/authSlice'
-import Loader from '../../utils/Style/Loader'
+import Loader from '../../utils/Loader/Loader'
 import Error from '../../pages/Error/Error'
 import AccountTransaction from '../../components/Account/Account'
 
