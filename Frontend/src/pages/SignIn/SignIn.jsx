@@ -28,17 +28,6 @@ function SignIn() {
       const formData = new FormData(form)
       const email = formData.get('email')
       const password = formData.get('password')
-
-      if (!email) {
-         setErrMsg('Veuillez indiquer un mail')
-      } else if (!password) {
-         setErrMsg('Veuillez indiquer un mot de passe')
-      } else if (!token) {
-         setErrMsg(error)
-         form.reset()
-      } else {
-         setErrMsg('')
-      }
       // On envoie le thunk à dispatch
       // C'est Redux-Thunk qui va s'occuper de l'exécuter pour nous
       dispatch(fetchLogin({ email, password }))

@@ -11,7 +11,6 @@ const initialState = {
    error: null,
    userInfo: {},
    userName: null,
-   editUserName: null,
 }
 
 // on gère les actions dans le reducer

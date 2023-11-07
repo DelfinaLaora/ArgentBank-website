@@ -67,7 +67,7 @@ function User() {
                            {user.firstName} {user.lastName}
                         </h1>
                      ) : (
-                        <h1> welcome</h1>
+                        <h1>welcome</h1>
                      )}
 
                      <button
