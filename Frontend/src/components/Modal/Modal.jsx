@@ -32,7 +32,7 @@ function Modal() {
                            type="text"
                            name="userName"
                            id="userName"
-                           placeholder={user.userName || ''}
+                           defaultValue={user.userName}
                         />
                      </div>
                      <div className="input-wrapper-edit">
