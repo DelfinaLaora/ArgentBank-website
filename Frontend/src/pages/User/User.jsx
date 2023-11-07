@@ -58,7 +58,7 @@ function User() {
          ) : (
             <>
                {isOpen && <Modal />}
-               <main className="main bg-dark">
+               <div className="main bg-dark">
                   <div className="header">
                      {token !== null ? (
                         <h1>
@@ -90,7 +90,7 @@ function User() {
                         />
                      ))}
                   </div>
-               </main>
+               </div>
             </>
          )}
       </>

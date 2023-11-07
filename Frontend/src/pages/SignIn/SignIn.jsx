@@ -53,46 +53,43 @@ function SignIn() {
    }, [navigate, dispatch, token])
 
    return (
-      <main className="main bg-dark">
-         <div className="contener-sign-in">
-            <section className="sign-in-content">
-               <i className="fa fa-user-circle sign-in-icon"></i>
-               <h1>Sign In</h1>
-               <form onSubmit={handleSubmit}>
-                  <div className="input-wrapper">
-                     <label htmlFor="email">Email</label>
-                     <input type="text" id="email" name="email" />
-                  </div>
-                  <div className="input-wrapper">
-                     <label htmlFor="password">Password</label>
-                     <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        autoComplete="on"
-                     />
-                  </div>
-                  <div className="input-remember">
-                     <label htmlFor="remember-me">Remember me</label>
-                     <input type="checkbox" id="remember-me" />
-                  </div>
-                  <p
-                     className={errMsg ? 'error_msg' : ''}
-                     aria-live="assertive"
-                  >
-                     {errMsg}
-                  </p>
-                  <button
-                     type="submit"
-                     className="sign-in-button"
-                     disabled={loading}
-                  >
-                     {loading ? <Loader /> : 'Sign In'}
-                  </button>
-               </form>
-            </section>
-         </div>
-      </main>
+      // <main className="main bg-dark">
+      <div className="contener-sign-in main bg-dark">
+         <section className="sign-in-content">
+            <i className="fa fa-user-circle sign-in-icon"></i>
+            <h1>Sign In</h1>
+            <form onSubmit={handleSubmit}>
+               <div className="input-wrapper">
+                  <label htmlFor="email">Email</label>
+                  <input type="text" id="email" name="email" />
+               </div>
+               <div className="input-wrapper">
+                  <label htmlFor="password">Password</label>
+                  <input
+                     type="password"
+                     id="password"
+                     name="password"
+                     autoComplete="on"
+                  />
+               </div>
+               <div className="input-remember">
+                  <label htmlFor="remember-me">Remember me</label>
+                  <input type="checkbox" id="remember-me" />
+               </div>
+               <p className={errMsg ? 'error_msg' : ''} aria-live="assertive">
+                  {errMsg}
+               </p>
+               <button
+                  type="submit"
+                  className="sign-in-button"
+                  disabled={loading}
+               >
+                  {loading ? <Loader /> : 'Sign In'}
+               </button>
+            </form>
+         </section>
+      </div>
+      // </main>
    )
 }
 
