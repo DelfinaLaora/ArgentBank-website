@@ -1,7 +1,7 @@
 // import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchProfil, updateUserName } from '../../features/authActions'
+import { updateUserName } from '../../features/authActions'
 import { selectCurrentUserInfo } from '../../features/authSlice'
 import { closeModal } from '../../features/modalSlice'
 
@@ -17,7 +17,6 @@ function Modal() {
 
       dispatch(updateUserName({ editUserName: userName }))
 
-      dispatch(fetchProfil())
       dispatch(closeModal())
    }
    return (

@@ -15,6 +15,7 @@ function Header() {
    const dispatch = useDispatch()
    const token = useSelector(selectCurrentUserToken)
    const userName = useSelector(selectCurrentUserName)
+
    useEffect(() => {
       if (token) dispatch(fetchProfil())
    }, [dispatch, token])
